@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Waste Sort AI — Engineering Console</title>
+<style>
+:root{--bg:#07110d;--panel:#0b1711;--panel2:#0e1d15;--line:#233a2d;--text:#f1f6f2;--muted:#91a399;--lime:#b8f56b;--cyan:#68e4ff;--amber:#ffc966;--red:#ff7781;--violet:#a98bff;--blue:#81a9ff;--shadow:0 22px 70px rgba(0,0,0,.34);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 78% 0,#173723 0,#07110d 42%,#050a07 100%);color:var(--text);min-height:100vh}button,input{font:inherit}button{cursor:pointer}#app{min-height:100vh}.boot{min-height:100vh;display:grid;place-items:center;padding:28px}.boot-wrap{width:min(1220px,100%);display:grid;grid-template-columns:1.12fr .88fr;gap:16px}.hero,.login{border:1px solid var(--line);background:linear-gradient(145deg,rgba(15,30,21,.96),rgba(7,14,10,.98));box-shadow:var(--shadow);border-radius:28px}.hero{padding:56px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:700px;height:700px;border-radius:50%;right:-410px;top:-360px;background:radial-gradient(circle,rgba(184,245,107,.18),transparent 66%)}.eyebrow{color:var(--lime);font-size:11px;font-weight:900;letter-spacing:.22em;text-transform:uppercase}.hero h1{font-size:70px;line-height:.9;letter-spacing:-.065em;max-width:780px;margin:18px 0 20px}.hero p{max-width:680px;color:#b7c4bb;font-size:17px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:34px}.tag{padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:#09150e;color:#9bac9f;font-size:11px}.login{padding:38px;display:flex;flex-direction:column;justify-content:center}.brand{display:flex;align-items:center;gap:11px;font-weight:950;font-size:20px}.mark{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--lime),#72eaa4);color:#0a130c}.login h2{font-size:38px;margin:28px 0 7px}.muted{color:var(--muted)}.field{margin-top:15px}.field label{font-size:10px;letter-spacing:.16em;color:#7f9186;font-weight:800;display:block;margin-bottom:7px}.field input{width:100%;padding:13px 14px;border-radius:12px;background:#08130d;color:var(--text);border:1px solid var(--line);outline:none}.btn{border:1px solid transparent;padding:12px 15px;border-radius:12px;font-weight:900;background:linear-gradient(135deg,var(--lime),#72eaa4);color:#08120c}.btn.alt{background:#0a1710;border-color:var(--line);color:var(--text)}.micro{font-size:11px;color:#66756c;margin-top:16px}.quick{margin-top:11px;display:flex;gap:8px;flex-wrap:wrap}.quick button{border:1px solid var(--line);background:#0a1710;color:#9dae9f;border-radius:999px;padding:8px 11px}.shell{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.side{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);background:rgba(5,11,8,.85);backdrop-filter:blur(16px);padding:16px 13px;display:flex;flex-direction:column;z-index:20}.side-brand{display:flex;align-items:center;gap:9px;padding:10px 8px 24px}.side-brand .mark{width:38px;height:38px;border-radius:11px}.nav{display:grid;gap:5px}.nav button{border:0;background:none;color:#839188;text-align:left;padding:11px;border-radius:11px;font-weight:750;display:flex;align-items:center;gap:9px}.nav button:hover,.nav button.active{background:#0d1d14;color:#f3f8f4}.nav button.active{box-shadow:inset 2px 0 0 var(--lime)}.side-foot{margin-top:auto;border:1px solid var(--line);background:#08130c;border-radius:14px;padding:12px}.online{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:850}.led{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 14px var(--lime)}main{padding:20px 28px 46px;min-width:0}.top{position:sticky;top:0;z-index:15;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:3px 0 17px;background:linear-gradient(var(--bg),rgba(7,17,13,.96) 74%,transparent)}.top h2{font-size:22px;margin:0}.top .sub{color:var(--muted);font-size:12px}.top-right{display:flex;gap:8px;align-items:center}.clock{font-variant-numeric:tabular-nums;color:#9dad9f}.avatar{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;background:#0a1710;font-size:11px}.view{animation:in .28s ease}@keyframes in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}.grid{display:grid;gap:12px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1.35fr .85fr}.card{background:linear-gradient(145deg,rgba(14,28,20,.96),rgba(8,16,11,.98));border:1px solid var(--line);border-radius:19px;box-shadow:var(--shadow);overflow:hidden}.pad{padding:18px}.kpi{padding:18px}.label{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}.kpi b{font-size:31px;display:block;margin:8px 0 3px}.good{color:var(--lime)}.warn{color:var(--amber)}.bad{color:var(--red)}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.head h3{font-size:15px;margin:0}.small{font-size:11px;color:var(--muted)}.pill{font-size:10px;padding:5px 8px;border:1px solid var(--line);border-radius:999px;color:#aab8ae;font-weight:850}.pill.live{border-color:rgba(184,245,107,.22);color:var(--lime)}.pill.warn{border-color:rgba(255,201,102,.22);color:var(--amber)}.pill.bad{border-color:rgba(255,119,129,.22);color:var(--red)}.cell{height:370px;border:1px solid var(--line);border-radius:17px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 34%,#183523,transparent 50%),#08120d}.cam{position:absolute;left:50%;top:18px;transform:translateX(-50%);width:190px;height:92px;border-radius:18px;border:1px solid #34533e;background:#102018}.lens{position:absolute;left:50%;top:20px;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;border:5px solid #27432f;box-shadow:inset 0 0 0 8px #08120d,0 0 24px rgba(104,228,255,.16)}.scan{position:absolute;left:11%;right:11%;top:118px;height:82px;border:1px dashed var(--cyan);background:linear-gradient(90deg,transparent,rgba(104,228,255,.04),transparent);animation:scan 1.8s linear infinite}.scan span{position:absolute;top:-18px;left:4px;color:var(--cyan);font-size:9px;letter-spacing:.12em}@keyframes scan{50%{transform:translateX(3%);opacity:.95}to{transform:translateX(-3%);opacity:.42}}.belt{position:absolute;left:5%;right:5%;top:190px;height:68px;border-radius:18px;border:1px solid #2c4937;background:repeating-linear-gradient(100deg,#14271b 0 26px,#0c1a12 26px 52px)}.belt:before{content:"";position:absolute;left:0;right:0;top:29px;border-top:1px dashed #55705a}.obj{position:absolute;top:207px;width:42px;height:31px;border-radius:8px;background:#dae5df;color:#0c1a11;display:grid;place-items:center;font-weight:950;box-shadow:0 8px 18px rgba(0,0,0,.28)}.static1{left:14%}.static2{left:28%}.static3{left:42%}.run{left:6%;animation:move 3.6s linear forwards}@keyframes move{to{left:78%}}.gate{position:absolute;right:12%;top:179px;width:17px;height:110px;border-radius:8px;background:linear-gradient(#6c8f72,#2d4936);transform-origin:bottom}.gate.move{animation:swing .8s ease}@keyframes swing{50%{transform:rotate(29deg)}100%{transform:none}}.readout{position:absolute;top:12px;right:12px;border:1px solid var(--line);border-radius:12px;padding:9px;width:170px;background:rgba(5,11,8,.72);backdrop-filter:blur(8px)}.readout b{display:block;font-size:24px;margin-top:2px}.readout .small{font-size:10px}.bin{position:absolute;bottom:13px;width:92px;height:55px;border:1px solid #2b4735;border-radius:11px;background:#0b1911;display:grid;place-items:center;font-size:9px;color:#a6b6aa}.b1{left:5%}.b2{left:27%}.b3{left:49%}.b4{right:5%}.sensor-grid{display:grid;gap:9px}.sensor{border:1px solid var(--line);border-radius:12px;padding:10px;background:#09150e}.sensor-top{display:flex;justify-content:space-between;gap:8px}.meter{height:6px;background:#193025;border-radius:999px;overflow:hidden;margin-top:8px}.meter i{height:100%;display:block;background:linear-gradient(90deg,var(--lime),#74eaa4);transition:width .35s}.actionbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.object-btn{border:1px solid var(--line);background:#0a1710;color:#a9b7ad;border-radius:999px;padding:9px 11px;font-size:11px}.object-btn:hover{border-color:rgba(184,245,107,.38);color:#edf5ef}.stream{display:grid;gap:0}.stream-row{display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #14251c}.stream-row:last-child{border-bottom:0}.ico{width:27px;height:27px;border-radius:8px;background:#102018;display:grid;place-items:center;font-size:10px;color:var(--lime)}.diagram-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.diagram-card{border:1px solid var(--line);border-radius:16px;background:#09150f;overflow:hidden;transition:transform .18s,border-color .18s}.diagram-card:hover{transform:translateY(-2px);border-color:#365640}.diagram-card img{display:block;width:100%;background:#07110d}.diagram-meta{padding:12px 14px}.diagram-meta b{font-size:13px}.diagram-meta div{font-size:11px;color:var(--muted);margin-top:3px}.status-list{display:grid;gap:8px}.status-line{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #14251c}.status-line:last-child{border-bottom:0}.code{background:#07110d;border:1px solid var(--line);border-radius:14px;overflow:auto}.code pre{margin:0;padding:16px;font:12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;color:#cbd8cf}.legend{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 0}.legend span{font-size:10px;color:var(--muted)}.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}.modal-back{position:fixed;inset:0;background:rgba(0,0,0,.72);display:grid;place-items:center;padding:20px;z-index:100}.modal{width:min(1080px,100%);max-height:88vh;overflow:auto;background:#0a1710;border:1px solid #365640;border-radius:20px;box-shadow:0 35px 100px rgba(0,0,0,.5)}.modal-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.modal-body{padding:16px}.modal-body img{width:100%;display:block;border-radius:12px;border:1px solid var(--line)}.close{border:1px solid var(--line);background:#0b1811;color:#d7e3da;border-radius:9px;padding:8px 11px}.toast{position:fixed;right:18px;bottom:18px;z-index:120;padding:11px 14px;background:#0d1c14;border:1px solid #35563f;border-radius:11px;box-shadow:var(--shadow);font-size:12px}.mobile{display:none}.atlas-note{padding:13px 14px;border:1px dashed #365640;border-radius:14px;background:#09150f;margin-bottom:14px;color:#abb8ae;font-size:11px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.route{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.route .r{padding:11px;border:1px solid var(--line);border-radius:12px;background:#0a1710}.route .r b{display:block;font-size:12px}.route .r span{display:block;font-size:10px;color:var(--muted);margin-top:4px}
+@media(max-width:1000px){.g4{grid-template-columns:repeat(2,1fr)}.g2,.two{grid-template-columns:1fr}.diagram-grid{grid-template-columns:1fr}.shell{grid-template-columns:1fr}.side{display:none}.mobile{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:30;background:rgba(8,16,11,.95);border:1px solid var(--line);border-radius:16px;padding:7px;overflow:auto}.mobile .nav{display:flex;gap:4px}.mobile button{white-space:nowrap}.hero h1{font-size:55px}.boot-wrap{grid-template-columns:1fr}.hero{padding:42px}}
+@media(max-width:650px){main{padding:14px 12px 85px}.g4,.g3{grid-template-columns:1fr}.hero h1{font-size:44px}.hero{padding:30px}.login{padding:28px}.top{align-items:flex-start}.top-right .clock{display:none}.cell{height:340px}.route{grid-template-columns:1fr 1fr}}
+
+/* --- sorter interaction layer --- */
+.cell{min-height:390px;height:390px;}
+.cell .machine-status{position:absolute;left:14px;top:14px;z-index:4;padding:7px 9px;border:1px solid var(--line);border-radius:10px;background:rgba(5,11,8,.76);backdrop-filter:blur(8px);font-size:10px;font-weight:900;letter-spacing:.08em;color:#b5c2b8}
+.cell .machine-status b{color:var(--lime)}
+.cell .machine-status.warn b{color:var(--amber)}
+.cell .machine-status.bad b{color:var(--red)}
+.cell .phase-track{position:absolute;left:16px;right:16px;bottom:82px;height:2px;background:#1d3024;z-index:1}
+.cell .phase-track i{display:block;height:100%;width:var(--phase,0%);background:linear-gradient(90deg,var(--cyan),var(--lime));box-shadow:0 0 12px rgba(104,228,255,.35);transition:width .35s ease}
+.cell .live-object{position:absolute;top:207px;left:var(--object-left,6%);opacity:var(--object-opacity,1);transform:scale(var(--object-scale,1)) rotate(var(--object-rot,0deg));transition:left .65s cubic-bezier(.2,.85,.2,1),opacity .35s,transform .35s;z-index:5;width:46px;height:34px;border-radius:9px;background:linear-gradient(145deg,#eff6f1,#bcd0c2);color:#0b170e;display:grid;place-items:center;font-weight:950;box-shadow:0 12px 24px rgba(0,0,0,.28)}
+.cell .live-object.reject{background:linear-gradient(145deg,#ffd3d7,#f08c96)}
+.cell .gate{transition:transform .35s ease;z-index:4}
+.cell .gate.open{transform:rotate(30deg)}
+.cell .bin{transition:border-color .25s,box-shadow .25s,transform .25s}
+.cell .bin.hot{border-color:rgba(184,245,107,.55);box-shadow:0 0 0 1px rgba(184,245,107,.12),0 0 24px rgba(184,245,107,.1);transform:translateY(-2px)}
+.cell .route-label{position:absolute;right:12px;top:108px;z-index:4;font-size:9px;color:#7f9587;letter-spacing:.1em;text-transform:uppercase}
+.stage-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:11px}
+.stage{border:1px solid var(--line);border-radius:9px;padding:8px 7px;background:#08130d;text-align:center;transition:.2s}
+.stage b{display:block;font-size:9px;letter-spacing:.08em}
+.stage span{display:block;font-size:8px;color:#617169;margin-top:3px}
+.stage.active{border-color:rgba(104,228,255,.5);background:#0b1d16;box-shadow:inset 0 0 0 1px rgba(104,228,255,.12)}
+.stage.done{border-color:rgba(184,245,107,.24);background:#0b1710}.stage.active b{color:var(--cyan)}.stage.done b{color:var(--lime)}
+.bench-select{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.bench-select button{border:1px solid var(--line);background:#09150f;color:#a8b7ad;border-radius:12px;padding:12px 8px;text-align:left;transition:.2s}
+.bench-select button:hover{border-color:#46634d;transform:translateY(-1px)}
+.bench-select button.selected{border-color:rgba(184,245,107,.55);background:#102018;box-shadow:inset 0 0 0 1px rgba(184,245,107,.1)}
+.bench-select .code{font:inherit;background:none;border:0;padding:0;color:var(--lime)}
+.bench-select strong{display:block;font-size:12px}.bench-select small{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.bench-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.bench-controls .btn[disabled],.bench-controls button[disabled]{opacity:.4;cursor:not-allowed}
+.cycle-readout{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:11px}.cycle-readout .read{border:1px solid var(--line);background:#09150f;border-radius:11px;padding:10px}.cycle-readout .read b{display:block;font-size:15px;margin-top:3px}.cycle-readout .read span{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.trace-step{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #14251c}.trace-step:last-child{border-bottom:0}.trace-dot{width:8px;height:8px;border-radius:50%;background:#294234;box-shadow:0 0 0 3px #0d1a12}.trace-step.active .trace-dot{background:var(--cyan);box-shadow:0 0 0 3px rgba(104,228,255,.1),0 0 10px rgba(104,228,255,.5)}.trace-step.done .trace-dot{background:var(--lime)}
+.helper{padding:10px 12px;border:1px dashed #365640;border-radius:12px;background:#09150f;color:#94a69a;font-size:10px;line-height:1.55}
+@media(max-width:650px){.bench-select{grid-template-columns:1fr 1fr}.stage-strip{grid-template-columns:repeat(4,1fr)}.cycle-readout{grid-template-columns:1fr 1fr 1fr}.cell{height:360px;min-height:360px}}
+
+/* --- premium login / visual-reference treatment --- */
+.boot{min-height:100vh;display:grid;place-items:stretch;padding:0;background:#07110c;position:relative;overflow:hidden}
+.boot:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 20%,rgba(184,245,107,.10),transparent 34%),radial-gradient(circle at 80% 78%,rgba(104,228,255,.08),transparent 30%);pointer-events:none}
+.boot-wrap{position:relative;z-index:1;width:100%;max-width:none;min-height:100vh;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(400px,.7fr);gap:0}
+.hero{border:0;border-right:1px solid rgba(255,255,255,.08);border-radius:0;background:linear-gradient(145deg,#0a1a11 0%,#07110c 58%,#050a07 100%);box-shadow:none;padding:clamp(38px,6vw,92px);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:780px;height:780px;border-radius:50%;right:-420px;top:-250px;background:radial-gradient(circle,rgba(184,245,107,.15),transparent 66%);pointer-events:none}
+.hero:before{content:"";position:absolute;inset:auto 7% 7% auto;width:54%;height:42%;border:1px solid rgba(255,255,255,.06);border-radius:50%;transform:rotate(-16deg);box-shadow:0 0 0 16px rgba(255,255,255,.012),0 0 0 32px rgba(255,255,255,.008);pointer-events:none}
+.hero-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.hero-brand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:.02em}
+.hero-brand .mark{width:36px;height:36px;border-radius:11px}
+.hero-copy{position:relative;z-index:2;max-width:850px;margin:auto 0;padding:10vh 0 7vh}
+.hero-copy .eyebrow{margin-bottom:18px}
+.hero-copy h1{font-size:clamp(54px,8vw,112px);line-height:.86;letter-spacing:-.075em;max-width:820px;margin:0}
+.hero-copy h1 em{font-style:normal;color:var(--lime)}
+.hero-copy p{max-width:610px;margin:26px 0 0;color:#a9b8ae;font-size:clamp(15px,1.35vw,18px);line-height:1.62}
+.hero-metrics{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;max-width:720px}
+.hero-metric{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);border-radius:15px;padding:13px 15px;backdrop-filter:blur(10px)}
+.hero-metric .mini{font-size:9px;color:#718078;text-transform:uppercase;letter-spacing:.16em}
+.hero-metric b{display:block;margin-top:5px;font-size:15px;color:#edf6ef}
+.hero-visual{position:absolute;left:9%;right:9%;bottom:17%;height:34%;min-height:190px;border:1px solid rgba(255,255,255,.08);border-radius:24px;background:linear-gradient(180deg,rgba(13,31,20,.76),rgba(5,12,8,.92));overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.03)}
+.hero-visual .hv-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 80%,transparent)}
+.hero-visual .hv-label{position:absolute;left:18px;top:16px;color:#708078;font-size:9px;letter-spacing:.17em;text-transform:uppercase}
+.hero-visual .hv-line{position:absolute;left:7%;right:7%;top:58%;height:1px;background:linear-gradient(90deg,transparent,#395540,transparent)}
+.hero-visual .hv-pack{position:absolute;top:48%;width:68px;height:38px;border-radius:10px;border:1px solid rgba(184,245,107,.28);background:linear-gradient(145deg,#d8e8dc,#78927f);box-shadow:0 10px 26px rgba(0,0,0,.22);animation:hvMove 4.8s cubic-bezier(.18,.78,.19,1) infinite}
+.hero-visual .hv-pack:before{content:"AI";position:absolute;inset:0;display:grid;place-items:center;font-weight:950;color:#0c180f;font-size:12px;letter-spacing:.08em}
+.hero-visual .hv-scan{position:absolute;left:34%;right:22%;top:34%;height:55px;border:1px dashed rgba(104,228,255,.45);border-radius:12px;box-shadow:0 0 30px rgba(104,228,255,.06)}
+.hero-visual .hv-scan:before{content:"CAMERA / INFERENCE ZONE";position:absolute;left:10px;top:-17px;color:#6aa8b1;font-size:8px;letter-spacing:.14em}
+.hero-visual .hv-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 16px var(--lime);animation:hvPulse 1.5s infinite}
+.hero-visual .d1{left:12%;top:29%}.hero-visual .d2{left:68%;top:24%;animation-delay:.3s}.hero-visual .d3{left:83%;top:69%;animation-delay:.6s}
+@keyframes hvMove{0%{left:7%;opacity:.0}10%{opacity:1}62%{left:62%;opacity:1}78%{left:74%;opacity:0}100%{left:74%;opacity:0}}
+@keyframes hvPulse{50%{opacity:.35;transform:scale(.65)}100%{opacity:1;transform:none}}
+.login-ref-override{all:initial}
+/* --- final reference-led login: clean image collage + centered card --- */
+body:has(.login-ref-page){background:#efece7;color:#1b211d}
+.login-ref-page{min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden;background:#efece7;color:#1b211d;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.login-ref-page::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(239,236,231,.08),rgba(239,236,231,.08)),radial-gradient(circle at 50% 50%,rgba(255,255,255,.55),transparent 48%);pointer-events:none;z-index:1}
+.login-mosaic{position:absolute;inset:-5%;display:grid;grid-template-columns:repeat(6,1fr);gap:12px;transform:rotate(-3deg) scale(1.08);opacity:.72;filter:saturate(.88) contrast(1.04)}
+.login-mosaic .tile{position:relative;overflow:hidden;border-radius:20px;background:#d7ddd7;box-shadow:0 14px 40px rgba(45,53,47,.10);min-height:220px}
+.login-mosaic .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(13,29,18,.18));mix-blend-mode:multiply}
+.login-mosaic .tile:nth-child(1){background-image:url('../diagrams/08-prototype.png');background-size:cover;background-position:center}
+.login-mosaic .tile:nth-child(2){background-image:url('../diagrams/06-hardware.png');background-size:cover;background-position:center top}
+.login-mosaic .tile:nth-child(3){background-image:url('../diagrams/03-ai-pipeline.png');background-size:cover;background-position:center}
+.login-mosaic .tile:nth-child(4){background-image:url('../diagrams/01-system-architecture.png');background-size:cover;background-position:center}
+.login-mosaic .tile:nth-child(5){background-image:url('../diagrams/07-sensors.png');background-size:cover;background-position:center}
+.login-mosaic .tile:nth-child(6){background-image:url('../diagrams/09-actuation.png');background-size:cover;background-position:center}
+.login-mosaic .tile:nth-child(7){background-image:url('../diagrams/08-prototype.png');background-size:cover;background-position:60% 20%}
+.login-mosaic .tile:nth-child(8){background-image:url('../diagrams/10-erd.png');background-size:cover;background-position:center}
+.login-mosaic .tile:nth-child(9){background-image:url('../diagrams/04-frontend.png');background-size:cover;background-position:center}
+.login-mosaic .tile:nth-child(10){background-image:url('../diagrams/12-deployment.png');background-size:cover;background-position:center}
+.login-mosaic .tile:nth-child(11){background-image:url('../diagrams/02-data-flow.png');background-size:cover;background-position:center}
+.login-mosaic .tile:nth-child(12){background-image:url('../diagrams/11-boot-loop.png');background-size:cover;background-position:center}
+.login-mosaic .tile:nth-child(n+13){background:#dfe6df}
+.login-ref-card{position:relative;z-index:5;width:min(420px,calc(100vw - 32px));padding:38px 40px 34px;border-radius:28px;background:rgba(255,255,255,.975);box-shadow:0 35px 100px rgba(27,32,28,.22),0 5px 16px rgba(27,32,28,.08);border:1px solid rgba(18,30,20,.07);animation:loginPop .5s cubic-bezier(.2,.85,.2,1) both}
+@keyframes loginPop{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.login-ref-brand{display:flex;justify-content:center;align-items:center;gap:10px;color:#172018;font-weight:900;font-size:18px;letter-spacing:-.02em}
+.login-ref-mark{width:36px;height:36px;border-radius:50%;background:#1b241e;color:#b8f56b;display:grid;place-items:center;font-size:17px;font-weight:900}
+.login-ref-card h2{margin:25px 0 7px;text-align:center;font-size:33px;line-height:1.04;letter-spacing:-.045em;color:#172018}
+.login-ref-sub{text-align:center;margin:0 auto 24px;max-width:290px;color:#707870;font-size:13px;line-height:1.55}
+.login-ref-field{margin-top:13px}
+.login-ref-field label{display:block;font-size:10px;color:#5f685f;font-weight:800;margin:0 0 6px 4px;letter-spacing:.06em}
+.login-ref-field input{width:100%;height:48px;padding:0 15px;border-radius:14px;background:#f7f7f5;border:1px solid #dcdeda;color:#1b211d;outline:none;transition:.18s}
+.login-ref-field input::placeholder{color:#9aa19b}
+.login-ref-field input:focus{background:#fff;border-color:#718773;box-shadow:0 0 0 4px rgba(113,135,115,.10)}
+.login-ref-primary{width:100%;height:48px;margin-top:16px;border:0;border-radius:999px;background:#18211b;color:#f7faf8;font-weight:850;font-size:13px;letter-spacing:.01em;transition:transform .18s,box-shadow .18s,background .18s}
+.login-ref-primary:hover{transform:translateY(-1px);background:#253129;box-shadow:0 10px 24px rgba(24,33,27,.15)}
+.login-ref-demo{width:100%;height:46px;margin-top:10px;border:1px solid #d9ddd8;border-radius:999px;background:#fff;color:#263029;font-weight:800;font-size:12px;transition:.18s}
+.login-ref-demo:hover{border-color:#9cab9c;background:#f7f8f5}
+.login-ref-or{display:flex;align-items:center;gap:10px;margin:17px 0;color:#a0a6a0;font-size:10px;font-weight:800;letter-spacing:.14em;justify-content:center}
+.login-ref-or::before,.login-ref-or::after{content:"";height:1px;background:#e3e5e1;flex:1}
+.login-ref-help{display:flex;justify-content:center;gap:14px;margin-top:15px;font-size:11px}
+.login-ref-help button{border:0;background:none;color:#59645b;padding:0;text-decoration:underline;text-underline-offset:3px}
+.login-ref-foot{text-align:center;margin-top:20px;color:#9aa19b;font-size:9px;line-height:1.55}
+.login-ref-status{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:10px;color:#6c756d;font-size:9px;letter-spacing:.05em}
+.login-ref-status i{width:6px;height:6px;border-radius:50%;background:#67b57d;box-shadow:0 0 0 3px rgba(103,181,125,.10)}
+.login-ref-error{text-align:center;min-height:16px;margin-top:9px;color:#c04c56;font-size:11px}
+@media(max-width:820px){.login-mosaic{grid-template-columns:repeat(4,1fr)}.login-mosaic .tile:nth-child(n+11){display:none}.login-ref-card{padding:32px 28px 28px}}
+@media(max-width:560px){.login-ref-page{padding:18px}.login-mosaic{inset:-18%;grid-template-columns:repeat(3,1fr);gap:8px;opacity:.30;filter:blur(1.5px) saturate(.72)}.login-ref-card{width:min(390px,100%);padding:28px 22px 24px;border-radius:22px}.login-ref-card h2{font-size:29px}.login-ref-sub{font-size:12px}}
+
+
+/* --- unified product theme: extends the refined login language into the console --- */
+body:has(.shell){background:#efebe5;color:#1b211d}
+body:has(.shell) #app{background:#efebe5}
+body:has(.shell) .shell{grid-template-columns:228px 1fr;min-height:100vh;background:#efebe5}
+body:has(.shell) .side{border-right:1px solid #dedbd4;background:rgba(250,249,246,.92);backdrop-filter:blur(18px);padding:18px 14px;box-shadow:12px 0 32px rgba(41,49,43,.035)}
+body:has(.shell) .side-brand{padding:8px 8px 26px;color:#172018}
+body:has(.shell) .side-brand .mark{width:34px;height:34px;border-radius:50%;background:#18211b;color:#b9f27b}
+body:has(.shell) .nav{gap:3px}
+body:has(.shell) .nav button{color:#727a73;padding:11px 12px;border-radius:12px;font-size:13px;font-weight:760;transition:background .18s,color .18s,transform .18s}
+body:has(.shell) .nav button:hover{background:#f0eee9;color:#202820;transform:translateX(1px)}
+body:has(.shell) .nav button.active{background:#e8eee7;color:#18221a;box-shadow:inset 2px 0 0 #5f785f}
+body:has(.shell) .nav button span{width:18px;text-align:center;color:#68776c;font-size:13px}
+body:has(.shell) .side-foot{border:1px solid #ddd9d1;background:#f6f5f1;border-radius:15px;padding:12px;color:#263027}
+body:has(.shell) .online{color:#3f4b42}
+body:has(.shell) .led{background:#64a874;box-shadow:0 0 0 4px rgba(100,168,116,.10),0 0 10px rgba(100,168,116,.24)}
+body:has(.shell) main{padding:24px 34px 48px;min-width:0}
+body:has(.shell) .top{padding:0 0 20px;background:linear-gradient(#efebe5 72%,rgba(239,235,229,0));border-bottom:1px solid #e1ddd5}
+body:has(.shell) .top h2{font-size:28px;letter-spacing:-.045em;color:#182018}
+body:has(.shell) .top .sub{color:#7a827a;font-size:12px;margin-top:4px}
+body:has(.shell) .clock{color:#757d75}
+body:has(.shell) .avatar{width:36px;height:36px;background:#f8f7f3;border:1px solid #d9d5cd;color:#465248}
+body:has(.shell) .btn{background:#18211b;color:#f8faf8;border:0;box-shadow:0 8px 20px rgba(24,33,27,.08)}
+body:has(.shell) .btn:hover{background:#26342a;transform:translateY(-1px)}
+body:has(.shell) .btn.alt{background:#faf9f6;color:#29322c;border:1px solid #d9d5cd;box-shadow:none}
+body:has(.shell) .btn.alt:hover{background:#fff;border-color:#bdbbb4}
+body:has(.shell) .view{animation:in .22s ease}
+body:has(.shell) .card{background:rgba(255,255,255,.78);border:1px solid #dedbd4;border-radius:20px;box-shadow:0 16px 42px rgba(38,45,39,.055);backdrop-filter:blur(8px)}
+body:has(.shell) .pad,body:has(.shell) .kpi{padding:20px}
+body:has(.shell) .kpi b{color:#1c241e;font-size:34px;letter-spacing:-.04em}
+body:has(.shell) .label{color:#747d75;letter-spacing:.12em}
+body:has(.shell) .small{color:#7b837c}
+body:has(.shell) .good{color:#557c56}
+body:has(.shell) .warn{color:#9a6f26}
+body:has(.shell) .bad{color:#b34b54}
+body:has(.shell) .pill{border-color:#d7d5cf;color:#59625b;background:#f8f7f3}
+body:has(.shell) .pill.live{border-color:#b9cfb9;color:#527256;background:#eff6ee}
+body:has(.shell) .pill.warn{border-color:#e0cfaa;color:#946c28;background:#fbf6e9}
+body:has(.shell) .pill.bad{border-color:#e3bcc0;color:#a34c54;background:#fbefef}
+body:has(.shell) .head h3{color:#202820;font-size:15px;letter-spacing:-.015em}
+body:has(.shell) .stage{background:#faf9f6;border-color:#d9d6cf}
+body:has(.shell) .stage span{color:#8a928c}
+body:has(.shell) .stage.active{background:#edf5ee;border-color:#aac4ab;box-shadow:inset 0 0 0 1px rgba(95,120,95,.10)}
+body:has(.shell) .stage.active b{color:#55785b}
+body:has(.shell) .stage.done{background:#f3f7f2;border-color:#d2dfd2}
+body:has(.shell) .stage.done b{color:#5f7f62}
+body:has(.shell) .object-btn,.shell .bench-controls .btn.alt,.shell .bench-select button{background:#faf9f6;color:#334038;border-color:#d8d5ce}
+body:has(.shell) .object-btn:hover{background:#fff;border-color:#aebcae;color:#263128}
+body:has(.shell) .bench-select button.selected{background:#eef4ec;border-color:#afc5b0;box-shadow:inset 0 0 0 1px rgba(95,120,95,.08)}
+body:has(.shell) .bench-select .code{color:#547557}
+body:has(.shell) .bench-select strong{color:#273027}
+body:has(.shell) .helper{background:#f6f7f3;border:1px dashed #c8d2c7;color:#6c756d}
+body:has(.shell) .cycle-readout .read{background:#f7f7f4;border-color:#dedbd4}
+body:has(.shell) .cycle-readout .read b{color:#263028}
+body:has(.shell) .trace-step{border-bottom-color:#e7e4dd}
+body:has(.shell) .trace-step.active .trace-dot{background:#6ab0bc;box-shadow:0 0 0 4px rgba(106,176,188,.12),0 0 12px rgba(106,176,188,.30)}
+body:has(.shell) .trace-step.done .trace-dot{background:#779b79}
+body:has(.shell) .ico{background:#eef1ec;color:#5f7b60}
+body:has(.shell) .stream-row{border-bottom-color:#ece9e2}
+body:has(.shell) .status-line{border-bottom-color:#e8e5de}
+body:has(.shell) .status-line b{color:#2a322b}
+body:has(.shell) .code{background:#f3f4f0;border-color:#dcd9d2}
+body:has(.shell) .code pre{color:#3c4940}
+body:has(.shell) .diagram-grid{gap:14px}
+body:has(.shell) .diagram-card{background:#faf9f6;border-color:#dcd9d2;box-shadow:0 10px 26px rgba(40,48,41,.04)}
+body:has(.shell) .diagram-card:hover{border-color:#a9b7a9;box-shadow:0 16px 30px rgba(40,48,41,.07);transform:translateY(-3px)}
+body:has(.shell) .diagram-card img{background:#f0eee9}
+body:has(.shell) .diagram-meta{background:#faf9f6}
+body:has(.shell) .diagram-meta b{color:#273127}
+body:has(.shell) .diagram-meta div{color:#7b837b}
+/* keep the physical machine viewport dark enough to read as real hardware while matching the new neutral shell */
+body:has(.shell) .cell{background:radial-gradient(circle at 50% 34%,#274133,transparent 50%),#0a1510;border-color:#49614f;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 18px 40px rgba(36,45,38,.10)}
+body:has(.shell) .cam{border-color:#526a57;background:#122019}
+body:has(.shell) .belt{border-color:#425948;background:repeating-linear-gradient(100deg,#17261b 0 26px,#0d1711 26px 52px)}
+body:has(.shell) .bin{background:#101b14;border-color:#425744;color:#c2d0c5}
+body:has(.shell) .readout{background:rgba(10,18,13,.76);border-color:#405346}
+body:has(.shell) .route-label{color:#91a398}
+body:has(.shell) .phase-track{background:#2c4031}
+body:has(.shell) .atlas-note{background:#f6f5f1!important;color:#6f7871!important;border-color:#d7d4cd!important}
+body:has(.shell) .mobile{background:rgba(250,249,246,.96);border-top:1px solid #dad7d0}
+@media(max-width:980px){body:has(.shell) .shell{grid-template-columns:82px 1fr}body:has(.shell) .side-brand b,body:has(.shell) .nav button:not(.active)::first-letter{font-size:0}body:has(.shell) .nav button{justify-content:center;font-size:0}body:has(.shell) .nav button span{font-size:14px}body:has(.shell) main{padding:22px 22px 44px}}
+@media(max-width:650px){body:has(.shell) .shell{grid-template-columns:1fr}body:has(.shell) .side{display:none}body:has(.shell) main{padding:18px 16px 80px}body:has(.shell) .top h2{font-size:24px}}
+
+</style></head><body><div id="app"></div><script>
+const D='../diagrams/';
+const TYPES=[
+  {code:'OR',label:'ORGANIC',note:'wet / biodegradable',route:'Compost / Biogas'},
+  {code:'PL',label:'PLASTIC',note:'recyclable polymer',route:'Plastic Recovery'},
+  {code:'ME',label:'METAL',note:'ferrous / metal cue',route:'Metal Recovery'},
+  {code:'GL',label:'GLASS',note:'glass fraction',route:'Glass Recovery'}
+];
+const PROFILES={
+  OR:{confidence:96.4,presence:94,metal:5,moisture:91,weight:61,fill:34},
+  PL:{confidence:94.8,presence:93,metal:7,moisture:29,weight:48,fill:38},
+  ME:{confidence:93.5,presence:95,metal:96,moisture:14,weight:76,fill:47},
+  GL:{confidence:91.8,presence:92,metal:4,moisture:16,weight:69,fill:53},
+  RJ:{confidence:61.5,presence:87,metal:31,moisture:46,weight:58,fill:41}
+};
+const STAGES=[
+  {id:'idle',name:'IDLE',caption:'ready'},
+  {id:'detect',name:'DETECT',caption:'presence'},
+  {id:'capture',name:'CAPTURE',caption:'frame'},
+  {id:'infer',name:'INFER',caption:'model'},
+  {id:'fuse',name:'FUSE',caption:'sensors'},
+  {id:'gate',name:'GATE',caption:'decision'},
+  {id:'route',name:'ROUTE',caption:'actuate'}
+];
+const S={
+  user:null,page:'home',running:true,auto:false,busy:false,stage:'idle',selected:'PL',current:{code:'PL',label:'PLASTIC',route:'Plastic Recovery'},confidence:94.8,
+  total:8421,sorted:7998,reject:423,cycle:1482,
+  sensors:{presence:82,metal:17,moisture:41,weight:63,fill:54},history:[],queue:[],lastResult:null,cycleToken:0,autoTimer:null
+};
+const el=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function toast(msg){const old=document.querySelector('.toast');if(old)old.remove();const d=document.createElement('div');d.className='toast';d.textContent=msg;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+function login(){const u=(el('u')?.value||'').trim().toLowerCase(),p=el('p')?.value||'';if((u==='operator'||u==='')&&p==='sort123'){S.user={name:'Sort Operator'};S.page='home';render();toast('Operator session ready')}else if(el('err'))el('err').textContent='Demo access: operator / sort123'}
+function quick(){if(el('u'))el('u').value='operator';if(el('p'))el('p').value='sort123';login()}
+function nav(){return [['home','⌂','Command Center'],['sorter','◉','Live Sorter'],['system','⌘','System'],['atlas','▦','Engineering Atlas']].map(([id,ic,t])=>`<button class="${S.page===id?'active':''}" onclick="go('${id}')" type="button"><span>${ic}</span>${t}</button>`).join('')}
+function shell(content,title,sub){return `<div class="shell"><aside class="side"><div class="side-brand"><div class="mark">◈</div><b>WASTE SORT AI</b></div><div class="nav">${nav()}</div><div class="side-foot"><div class="online"><span class="led"></span>EDGE PROTOTYPE ONLINE</div><div class="small" style="margin-top:5px">Deterministic browser simulator</div></div></aside><main><div class="top"><div><h2>${title}</h2><div class="sub">${sub}</div></div><div class="top-right"><span class="clock" id="clock"></span><div class="avatar">SW</div><button class="btn alt" onclick="logout()" type="button">Exit</button></div></div><section class="view">${content}</section></main><div class="mobile"><div class="nav">${nav()}</div></div></div>`}
+function sensorCards(){return `<div class="sensor-grid">${[['Presence','arrival cue','presence'],['Metal','material cue','metal'],['Moisture','wetness cue','moisture'],['Weight','mass signal','weight'],['Bin fill','capacity feedback','fill']].map(x=>`<div class="sensor"><div class="sensor-top"><div><b>${x[0]}</b><div class="small">${x[1]}</div></div><span class="pill">${Math.round(S.sensors[x[2]])}%</span></div><div class="meter"><i style="width:${S.sensors[x[2]]}%"></i></div></div>`).join('')}</div>`}
+function stageIndex(){const i=STAGES.findIndex(s=>s.id===S.stage);return i<0?0:i}
+function currentProfile(){return PROFILES[S.current.code]||PROFILES.RJ}
+function phasePercent(){return ((Math.max(0,stageIndex())/(STAGES.length-1))*100).toFixed(1)}
+function objectLeft(){return ({idle:6,detect:12,capture:25,infer:40,fuse:54,gate:66,route:82})[S.stage]??6}
+function routeClass(){return S.current.code==='RJ'?'reject':''}
+function cell(){
+  const active=stageIndex();
+  const activeBin=S.stage==='route'?[...binCodes()].find(x=>x===S.current.code):null;
+  const binHot=x=>activeBin===x?' hot':'';
+  return `<div class="cell" data-cell>
+    <div class="machine-status ${S.current.code==='RJ'?'bad':''}">STATE <b>${S.stage.toUpperCase()}</b> · CYCLE ${S.cycle}</div>
+    <div class="route-label">${S.current.route||'Waiting for object'}</div>
+    <div class="cam"><div class="lens"></div><div class="small" style="position:absolute;left:12px;bottom:9px">RGB EDGE CAMERA</div></div>
+    <div class="scan"><span>SCAN ZONE · SENSOR FUSION</span></div>
+    <div class="readout"><div class="small">CURRENT INFERENCE</div><b>${esc(S.current.code)}</b><div class="small">${esc(S.current.label)} · ${Number(S.confidence).toFixed(1)}%</div></div>
+    <div class="belt"></div><div class="gate ${S.stage==='gate'||S.stage==='route'?'open':''}"></div>
+    <div class="obj static1">OR</div><div class="obj static2">PL</div><div class="obj static3">ME</div>
+    <div class="live-object ${routeClass()}" style="--object-left:${objectLeft()}%;--object-opacity:${S.stage==='route'?'.96':'1'}">${esc(S.current.code)}</div>
+    <div class="bin b1${binHot('OR')}">ORGANIC</div><div class="bin b2${binHot('PL')}">PLASTIC</div><div class="bin b3${binHot('ME')}${binHot('GL')}">METAL / GLASS</div><div class="bin b4${binHot('RJ')}">REJECT</div>
+    <div class="phase-track"><i style="--phase:${phasePercent()}%"></i></div>
+  </div>`
+}
+function binCodes(){return ['OR','PL','ME','GL','RJ']}
+function stageStrip(){const ai=stageIndex();return `<div class="stage-strip">${STAGES.map((s,i)=>`<div class="stage ${i<ai?'done':''} ${i===ai?'active':''}"><b>${s.name}</b><span>${s.caption}</span></div>`).join('')}</div>`}
+function historyList(){return S.history.length?S.history.slice(0,9).map(r=>`<div class="stream-row"><div class="ico">${r.code}</div><div><b>${esc(r.label)}</b><div class="small">${esc(r.route)} · ${r.time}</div></div><span class="pill ${r.conf<80?'bad':'live'}">${r.conf.toFixed(1)}%</span></div>`).join(''):'<div class="small" style="padding:20px 0">No completed cycles yet. Start a feed.</div>'}
+function home(){return `<div class="grid g4"><div class="card kpi"><span class="label">Objects processed</span><b id="kpi-total">${S.total.toLocaleString()}</b><span class="small">local demo counter</span></div><div class="card kpi"><span class="label">Routed successfully</span><b id="kpi-rate" class="good">${((S.sorted/Math.max(1,S.total))*100).toFixed(1)}%</b><span class="small">confidence gate passed</span></div><div class="card kpi"><span class="label">Reject / quarantine</span><b id="kpi-reject" class="warn">${S.reject.toLocaleString()}</b><span class="small">conservative safety path</span></div><div class="card kpi"><span class="label">Control loop</span><b id="kpi-loop" class="${S.busy?'good':'warn'}">${S.busy?'ACTIVE':'READY'}</b><span class="small">${S.auto?'auto mode':'operator mode'}</span></div></div>
+<div class="grid g2" style="margin-top:12px"><div class="card pad"><div class="head"><div><h3>Live sorting cell</h3><div class="small">A visible end-to-end cycle — not an instant counter update</div></div><span id="cycleState" class="pill ${S.busy?'live':'warn'}">${S.busy?S.stage.toUpperCase():'READY'}</span></div>${cell()}${stageStrip()}<div class="actionbar">${TYPES.map(t=>`<button class="object-btn" data-feed="${t.code}" ${S.busy?'disabled':''} onclick="startFeed('${t.code}')" type="button">Feed ${t.label}</button>`).join('')}<button class="object-btn" data-feed="RJ" ${S.busy?'disabled':''} onclick="startFeed('RJ')" type="button">Inject uncertain item</button><button class="object-btn" data-auto onclick="toggleAuto()" type="button">${S.auto?'Stop auto':'Start auto'}</button><button class="object-btn" data-stop onclick="stopCycle()" ${S.busy?'':'disabled'} type="button">Stop cycle</button></div></div>
+<div class="card pad"><div class="head"><div><h3>Sensor fusion</h3><div class="small">Signals update for the active object</div></div><span class="pill live">LIVE</span></div>${sensorCards()}<div class="helper" style="margin-top:10px">The browser prototype emulates the Raspberry Pi node. Camera, GPIO sensors, model inference and diverter actuation are represented as deterministic software states.</div></div></div>
+<div class="grid two" style="margin-top:12px"><div class="card pad" id="decision-card"><div class="head"><div><h3>Current decision</h3><div class="small">What the edge node would do at the gate</div></div><span id="decision-pill" class="pill ${S.confidence<80?'bad':'live'}">${S.confidence<80?'REJECT':'PASS'}</span></div><div class="cycle-readout"><div class="read"><span>Material</span><b id="decision-material">${esc(S.current.label)}</b></div><div class="read"><span>Confidence</span><b id="decision-confidence">${Number(S.confidence).toFixed(1)}%</b></div><div class="read"><span>Route</span><b id="decision-route">${esc(S.current.route||'—')}</b></div></div></div><div class="card pad" id="history-card"><div class="head"><div><h3>Recent completed cycles</h3><div class="small">latest edge decisions</div></div><span class="pill">${S.history.length} shown</span></div><div class="stream" id="history-stream">${historyList()}</div></div></div>`}
+function sorter(){return `<div class="grid g2"><div class="card pad"><div class="head"><div><h3>Manual test bench</h3><div class="small">Choose an object, then run or step through one full cycle</div></div><span id="cycleState" class="pill ${S.busy?'live':'warn'}">${S.busy?'TEST RUNNING':'READY'}</span></div>${cell()}${stageStrip()}<div class="bench-select">${TYPES.map(t=>`<button data-material="${t.code}" class="${S.selected===t.code?'selected':''}" onclick="selectMaterial('${t.code}')" ${S.busy?'disabled':''} type="button"><span class="code">${t.code}</span><strong>${t.label}</strong><small>${t.note}</small></button>`).join('')}<button data-material="RJ" class="${S.selected==='RJ'?'selected':''}" onclick="selectMaterial('RJ')" ${S.busy?'disabled':''} type="button"><span class="code">RJ</span><strong>UNCERTAIN</strong><small>force reject path</small></button></div><div class="bench-controls"><button id="run-manual" class="btn" onclick="startManual()" ${S.busy?'disabled':''} type="button">Run complete test</button><button id="step-manual" class="btn alt" onclick="stepManual()" ${S.busy||S.stage==='route'?'disabled':''} type="button">Step next stage</button><button class="btn alt" onclick="resetBench()" type="button">Reset bench</button></div><div class="helper" style="margin-top:11px">Manual mode proves the logic without hardware: <b>Detect → Capture → Infer → Fuse → Gate → Route</b>. “Uncertain” deliberately exercises the quarantine branch.</div></div><div class="card pad"><div class="head"><div><h3>Cycle trace</h3><div class="small">instrumentation for the selected object</div></div><span class="pill">TOKEN ${S.cycleToken}</span></div><div id="trace-list">${STAGES.slice(1).map(s=>`<div class="trace-step ${S.stage===s.id?'active':''} ${stageIndex()>STAGES.findIndex(x=>x.id===s.id)?'done':''}"><div class="trace-dot"></div><div><b>${s.name}</b><div class="small">${s.caption}</div></div><span class="pill">${s.id==='gate'?(S.confidence<80?'REJECT':'PASS'):s.id==='route'?(S.current.route||'—'):'ready'}</span></div>`).join('')}</div><div class="card pad" id="last-result-card" style="margin-top:12px;background:#08130d"><div class="head"><div><h3>Last result</h3><div class="small">only updates when a cycle completes</div></div><span class="pill ${S.lastResult&&S.lastResult.accepted?'live':'warn'}">${S.lastResult?(S.lastResult.accepted?'SORTED':'QUARANTINED'):'NO RESULT'}</span></div><div id="last-result-body">${S.lastResult?`<div class="cycle-readout"><div class="read"><span>Input</span><b>${esc(S.lastResult.label)}</b></div><div class="read"><span>Confidence</span><b>${S.lastResult.conf.toFixed(1)}%</b></div><div class="read"><span>Route</span><b>${esc(S.lastResult.route)}</b></div></div>`:'<div class="small">Run a test to populate the result.</div>'}</div></div></div></div>`}
+function system(){return `<div class="grid two"><div class="card pad"><div class="head"><div><h3>Software layers</h3><div class="small">source-aligned stack + explicit prototype boundary</div></div><span class="pill live">EDGE-FIRST</span></div>${[['Operating system','Raspberry Pi OS / Linux kernel','source'],['Runtime','Python 3.10+','source'],['Computer vision','camera capture + preprocessing / OpenCV','source'],['Machine learning','on-device inference / TensorFlow Lite','source'],['Sensor interface','sensor I/O + combined signal','source'],['Timing / gate control','actuation timing','source'],['Browser prototype','Vanilla HTML / CSS / JS simulator','implemented']].map(x=>`<div class="status-line"><div><b>${x[0]}</b><div class="small">${x[1]}</div></div><span class="pill ${x[2]==='implemented'?'live':'warn'}">${x[2].toUpperCase()}</span></div>`).join('')}</div><div class="card pad"><div class="head"><div><h3>Hardware contract</h3><div class="small">physical modules represented by the console</div></div><span class="pill warn">BUILD STAGE</span></div>${[['Controller','Raspberry Pi board','compute'],['Vision','RGB camera','capture'],['Presence','IR / proximity cue','arrival'],['Material cue','metal detector','metal'],['Wetness','moisture sensor','organic cue'],['Mass','load cell + ADC','weight'],['Capacity','fill-level sensor','bin health'],['Actuation','motor / diverter mechanism','route']].map(x=>`<div class="status-line"><div><b>${x[0]}</b><div class="small">${x[1]}</div></div><span class="pill">${x[2]}</span></div>`).join('')}</div></div><div class="card pad" style="margin-top:12px"><div class="head"><div><h3>Minimal application loop</h3><div class="small">the implementation story in one place</div></div></div><div class="code"><pre>while system_enabled:\n    object_present = poll_presence()\n    frame = capture_frame()\n    class_, confidence = infer(frame)\n    sensor_state = read_material_sensors()\n    decision = fuse(class_, confidence, sensor_state)\n    if decision.accepted:\n        actuate(decision.route, decision.timing)\n    else:\n        divert_to_reject()\n    log_cycle(decision, sensor_state)</pre></div></div>`}
+const diagrams=[['01-system-architecture.svg','01 · System Architecture','end-to-end closed loop'],['02-data-flow.svg','02 · DFD / Data Flow','system boundary + data movement'],['03-ai-pipeline.svg','03 · AI Pipeline','vision → fusion → gate'],['04-frontend.svg','04 · Frontend Architecture','operator console + state'],['05-backend.svg','05 · Backend Boundary','target service architecture'],['06-hardware.svg','06 · Hardware Block','compute + camera + sensors + actuator'],['07-sensors.svg','07 · Sensor / I-O','signal roles and fusion'],['08-prototype.svg','08 · Physical Prototype','conveyor cell layout'],['09-actuation.svg','09 · Actuation Sequence','timed physical cycle'],['10-erd.svg','10 · ERD / Data Model','auditable cycle storage'],['11-boot-loop.svg','11 · Boot → Loop','source-aligned startup flow'],['12-deployment.svg','12 · Deployment Topology','local node → future fleet']];
+function atlas(){return `<div class="atlas-note">The engineering atlas is the technical heart of the demo. It covers the complete A→Z chain: frontend, backend boundary, software runtime, AI inference, sensors, hardware, conveyor prototype, actuation, data model, boot loop and deployment. Exact GPIO pin numbers, mechanical dimensions and production API details are not claimed where the source material does not specify them.</div><div class="diagram-grid">${diagrams.map(d=>`<button class="diagram-card" style="text-align:left" onclick="diagram('${d[0]}','${d[1]}')" type="button"><img src="${D+d[0]}" loading="lazy" alt="${esc(d[1])}"><div class="diagram-meta"><b>${d[1]}</b><div>${d[2]}</div></div></button>`).join('')}</div>`}
+function diagram(file,title){const d=document.createElement('div');d.className='modal-back';d.innerHTML=`<div class="modal"><div class="modal-head"><b>${esc(title)}</b><button class="close" onclick="this.closest('.modal-back').remove()" type="button">Close</button></div><div class="modal-body"><img src="${D+file}" alt="${esc(title)}"></div></div>`;document.body.appendChild(d)}
+function selectedMaterial(code){
+  const t=code==='RJ'?{code:'RJ',label:'UNKNOWN / REJECT',note:'low-confidence branch',route:'Reject / Quarantine'}:TYPES.find(x=>x.code===code);
+  return t||TYPES[1];
+}
+function applyProfile(code){const p=PROFILES[code]||PROFILES.RJ;S.current=selectedMaterial(code);S.confidence=p.confidence;S.sensors={presence:p.presence,metal:p.metal,moisture:p.moisture,weight:p.weight,fill:Math.min(96,p.fill+(S.total%11))};}
+function selectMaterial(code){if(S.busy)return;S.selected=code;S.cycleToken++;S.stage='idle';applyProfile(code);S.lastResult=null;render();toast('Bench loaded · '+S.current.label)}
+function updateCycleUI(){
+  const c=document.querySelector('[data-cell]');
+  if(!c)return;
+  const idx=stageIndex();
+  const status=c.querySelector('.machine-status'); if(status)status.innerHTML=`STATE <b>${S.stage.toUpperCase()}</b> · CYCLE ${S.cycle}`;
+  const state=c.querySelector('.machine-status b'); if(state)state.textContent=S.stage.toUpperCase();
+  const label=c.querySelector('.route-label'); if(label)label.textContent=S.current.route||'Waiting for object';
+  const code=c.querySelector('.readout b'); if(code)code.textContent=S.current.code;
+  const small=c.querySelector('.readout .small:last-child'); if(small)small.textContent=`${S.current.label} · ${Number(S.confidence).toFixed(1)}%`;
+  const obj=c.querySelector('.live-object'); if(obj){obj.textContent=S.current.code;obj.classList.toggle('reject',S.current.code==='RJ');obj.style.setProperty('--object-left',`${objectLeft()}%`);obj.style.setProperty('--object-opacity',S.stage==='route'?'.96':'1');}
+  const gate=c.querySelector('.gate'); if(gate)gate.classList.toggle('open',S.stage==='gate'||S.stage==='route');
+  c.querySelectorAll('.bin').forEach(b=>b.classList.remove('hot'));
+  if(S.stage==='route'){
+    const target=S.current.code==='OR'?'.b1':S.current.code==='PL'?'.b2':(S.current.code==='ME'||S.current.code==='GL')?'.b3':'.b4';
+    const bin=c.querySelector(target); if(bin)bin.classList.add('hot');
+  }
+  const prog=c.querySelector('.phase-track i'); if(prog)prog.style.width=`${phasePercent()}%`;
+  const statePill=document.getElementById('cycleState'); if(statePill){statePill.textContent=S.busy?S.stage.toUpperCase():'READY';statePill.className=`pill ${S.busy?'live':'warn'}`;}
+  document.querySelectorAll('.stage-strip .stage').forEach((node,i)=>{node.classList.toggle('active',i===idx);node.classList.toggle('done',i<idx)});
+  document.querySelectorAll('.trace-step').forEach((node)=>{
+    const b=node.querySelector('b'); const i=STAGES.findIndex(x=>x.name===b?.textContent); if(i<0)return;
+    node.classList.toggle('active',STAGES[i].id===S.stage);node.classList.toggle('done',idx>i);
+    const pill=node.querySelector('.pill'); if(pill){if(STAGES[i].id==='gate')pill.textContent=S.confidence<80?'REJECT':'PASS';else if(STAGES[i].id==='route')pill.textContent=S.confidence<80?'Reject / Quarantine':S.current.route;}
+  });
+}
+function patchCycleShell(){
+  updateCycleUI();
+  const busy=S.busy;
+  document.querySelectorAll('[data-feed]').forEach(b=>{b.disabled=busy});
+  const stop=document.querySelector('[data-stop]'); if(stop)stop.disabled=!busy;
+  const run=document.getElementById('run-manual'); if(run)run.disabled=busy;
+  const step=document.getElementById('step-manual'); if(step)step.disabled=busy||S.stage==='route';
+  document.querySelectorAll('[data-material]').forEach(b=>{b.disabled=busy;b.classList.toggle('selected',b.dataset.material===S.selected)});
+  const total=document.getElementById('kpi-total'); if(total)total.textContent=S.total.toLocaleString();
+  const rate=document.getElementById('kpi-rate'); if(rate)rate.textContent=((S.sorted/Math.max(1,S.total))*100).toFixed(1)+'%';
+  const reject=document.getElementById('kpi-reject'); if(reject)reject.textContent=S.reject.toLocaleString();
+  const loop=document.getElementById('kpi-loop'); if(loop){loop.textContent=busy?'ACTIVE':'READY';loop.className=busy?'good':'warn'}
+  const dm=document.getElementById('decision-material'); if(dm)dm.textContent=S.current.label;
+  const dc=document.getElementById('decision-confidence'); if(dc)dc.textContent=Number(S.confidence).toFixed(1)+'%';
+  const dr=document.getElementById('decision-route'); if(dr)dr.textContent=S.confidence>=80?(S.current.route||'—'):'Reject / Quarantine';
+  const dp=document.getElementById('decision-pill'); if(dp){dp.textContent=S.confidence<80?'REJECT':'PASS';dp.className='pill '+(S.confidence<80?'bad':'live')}
+  const hs=document.getElementById('history-stream'); if(hs)hs.innerHTML=historyList();
+  const last=document.getElementById('last-result-card');
+  if(last){
+    const lp=last.querySelector('.head .pill');
+    if(lp){
+      lp.textContent=S.lastResult?(S.lastResult.accepted?'SORTED':'QUARANTINED'):'NO RESULT';
+      lp.className='pill '+(S.lastResult&&S.lastResult.accepted?'live':'warn');
+    }
+    const lb=document.getElementById('last-result-body');
+    if(lb){
+      lb.innerHTML=S.lastResult
+        ? `<div class="cycle-readout"><div class="read"><span>Input</span><b>${esc(S.lastResult.label)}</b></div><div class="read"><span>Confidence</span><b>${S.lastResult.conf.toFixed(1)}%</b></div><div class="read"><span>Route</span><b>${esc(S.lastResult.route)}</b></div></div>`
+        : '<div class="small">Run a test to populate the result.</div>';
+    }
+  }
+}
+function refreshViewNoScroll(){
+  const v=document.querySelector('.view');
+  if(!v){render();return}
+  v.innerHTML=page();
+  tick();
+}
+function completeCycle(accepted){
+  const r={code:S.current.code,label:S.current.label,conf:Number(S.confidence),accepted,route:accepted?S.current.route:'Reject / Quarantine',time:new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'})};
+  S.total++;S.cycle++;if(accepted)S.sorted++;else S.reject++;S.lastResult=r;S.history.unshift(r);S.history=S.history.slice(0,40);
+  S.busy=false;S.stage='route';
+  patchCycleShell();
+  setTimeout(()=>{if(S.stage==='route'&&!S.busy){S.stage='idle';patchCycleShell()}},720);
+}
+
+function cycleStages(code,manual=false){
+  if(S.busy)return;
+  if(code)S.selected=code;
+  applyProfile(S.selected);
+  S.busy=true;S.cycleToken++;S.stage='detect';
+  if(document.querySelector('[data-cell]')) patchCycleShell();
+  else refreshViewNoScroll();
+  const token=S.cycleToken;
+  const schedule=(stage,ms)=>setTimeout(()=>{if(token!==S.cycleToken||!S.busy)return;S.stage=stage;patchCycleShell()},ms);
+  schedule('capture',520);schedule('infer',1120);schedule('fuse',1820);schedule('gate',2520);schedule('route',3240);
+  setTimeout(()=>{if(token!==S.cycleToken||!S.busy)return;completeCycle(S.confidence>=80);toast(S.confidence>=80?S.current.label+' sorted · '+S.confidence.toFixed(1)+'%':'Uncertain item quarantined · '+S.confidence.toFixed(1)+'%')},4100);
+}
+
+function startFeed(code){if(S.busy)return;if(!S.running&&S.page==='home'){S.running=true;}cycleStages(code,false)}
+function startManual(){if(S.busy)return;cycleStages(S.selected,true)}
+function stepManual(){
+  if(S.busy){toast('Finish or stop the active cycle first');return}
+  if(S.stage==='route'){toast('Cycle complete — reset or choose another object');return}
+  const order=['idle','detect','capture','infer','fuse','gate','route'];
+  const next=order[Math.min(order.length-1,order.indexOf(S.stage)+1)];
+  if(S.stage==='idle'){S.cycleToken++;applyProfile(S.selected);}
+  S.stage=next;
+  if(next==='route'){
+    const accepted=S.confidence>=80;
+    S.total++;S.cycle++;if(accepted)S.sorted++;else S.reject++;
+    const r={code:S.current.code,label:S.current.label,conf:Number(S.confidence),accepted,route:accepted?S.current.route:'Reject / Quarantine',time:new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'})};
+    S.lastResult=r;S.history.unshift(r);S.history=S.history.slice(0,40);toast(accepted?'Manual test sorted object':'Manual test quarantined object');
+  }
+  patchCycleShell();
+}
+function resetBench(){S.busy=false;S.stage='idle';S.cycleToken++;S.lastResult=null;S.selected='PL';applyProfile('PL');refreshViewNoScroll();toast('Bench reset')}
+function stopCycle(){if(!S.busy)return;S.cycleToken++;S.busy=false;S.stage='idle';patchCycleShell();toast('Cycle stopped safely; no result recorded')}
+function toggleAuto(){S.auto=!S.auto;S.running=S.auto||S.running;if(S.auto&&!S.busy)autoNext();if(!S.auto){clearTimeout(S.autoTimer);S.autoTimer=null}patchCycleShell();const a=document.querySelector('[data-auto]');if(a)a.textContent=S.auto?'Stop auto':'Start auto';toast(S.auto?'Automatic feed loop enabled':'Automatic feed loop stopped')}
+function autoNext(){if(!S.auto||S.busy)return;const pool=['OR','PL','ME','GL','RJ'];const code=pool[S.cycle%pool.length];cycleStages(code,false);S.autoTimer=setTimeout(()=>autoNext(),5200)}
+function selfTest(){toast('PASS · camera · sensor bus · inference · actuator · event log')}
+function go(p){if(S.busy&&p!=='sorter'){toast('Active cycle is still running');return}S.page=p;render();window.scrollTo({top:0,behavior:'smooth'})}
+function logout(){S.auto=false;S.busy=false;S.cycleToken++;clearTimeout(S.autoTimer);S.autoTimer=null;S.user=null;render()}
+function tick(){const c=el('clock');if(c)c.textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+function page(){return S.page==='home'?home():S.page==='sorter'?sorter():S.page==='system'?system():atlas()}
+function render(){
+  if(!S.user){el('app').innerHTML=`<div class="login-ref-page"><div class="login-mosaic" aria-hidden="true">${Array.from({length:18},(_,i)=>`<div class="tile"></div>`).join('')}</div><section class="login-ref-card"><div class="login-ref-brand"><div class="login-ref-mark">↗</div><span>Waste Sort AI</span></div><h2>Welcome to Waste Sort AI</h2><p class="login-ref-sub">Sign in to the local sorting console and monitor the AI decision cycle.</p><div class="login-ref-field"><label for="u">Email or operator ID</label><input id="u" placeholder="operator" autocomplete="username" spellcheck="false"></div><div class="login-ref-field"><label for="p">Password</label><input id="p" type="password" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()"></div><div class="login-ref-help"><button type="button" onclick="el('p')?.focus()">Forgot access?</button></div><button class="login-ref-primary" onclick="login()" type="button">Log in</button><div class="login-ref-or">OR</div><button class="login-ref-demo" onclick="quick()" type="button">Continue with demo operator</button><div id="err" class="login-ref-error"></div><div class="login-ref-foot">By continuing, you are entering a local demonstration environment. No external account or API is required.</div><div class="login-ref-status"><i></i>Local edge prototype · ready</div></section></div>`;return}
+  el('app').innerHTML=shell(page(),({'home':'Command Center','sorter':'Live Sorter','system':'System & Architecture','atlas':'Engineering Atlas'})[S.page],'Waste Sort AI · focused closed-loop prototype');tick();
+}
+applyProfile('PL');render();setInterval(tick,1000)
+</script></body></html>
